@@ -2,7 +2,7 @@
 
 InsightGenie is a versatile AI-powered tool designed to extract, analyze, and retrieve specific information from datasets (CSV or Google Sheets) using dynamic queries. With integrated search capabilities and advanced response generation, InsightGenie simplifies data extraction and enhances productivity.
 
-![Dashboard Screenshot](INSERT_IMAGE_HERE) <!-- Add a screenshot of your dashboard -->
+![Dashboard Interface](https://github.com/DevyanshMalhotra/InsightGenie/raw/main/images/image1.png)
 
 ---
 
