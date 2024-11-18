@@ -164,5 +164,4 @@ A: Data is processed in batches to ensure scalability and prevent timeouts.
 
 **Q: Can additional features be added?**  
 A: Yes! The modular structure allows for easy integration of new features such as batch queries or advanced error handling.
-```
 
