@@ -2,7 +2,7 @@
 
 InsightGenie is a versatile AI-powered tool designed to extract, analyze, and retrieve specific information from datasets (CSV or Google Sheets) using dynamic queries. With integrated search capabilities and advanced response generation, InsightGenie simplifies data extraction and enhances productivity.
 
-![Dashboard Interface](https://github.com/DevyanshMalhotra/InsightGenie/raw/main/images/image1.png)
+![Dashboard Interface](https://github.com/DevyanshMalhotra/InsightGenie/raw/main/images/image6.png)
 
 ---
 
@@ -109,9 +109,15 @@ streamlit run app.py
 ## 📸 Screenshots
 
 - **Dashboard Interface**
-- **Results Table**
+![Dashboard Interface](https://github.com/DevyanshMalhotra/InsightGenie/raw/main/images/image1.png)
 
----
+![Dashboard Interface](https://github.com/DevyanshMalhotra/InsightGenie/raw/main/images/image4.png)
+
+- **Results Table**
+![Results/Query outputs](https://github.com/DevyanshMalhotra/InsightGenie/raw/main/images/image3.png)
+
+![Results/Query outputs](https://github.com/DevyanshMalhotra/InsightGenie/raw/main/images/image5.png)
+
 
 ## 🛡️ API Key Management
 
@@ -160,4 +166,3 @@ A: Data is processed in batches to ensure scalability and prevent timeouts.
 A: Yes! The modular structure allows for easy integration of new features such as batch queries or advanced error handling.
 ```
 
-This version is fully formatted in Markdown and ready for your `README.md`.
