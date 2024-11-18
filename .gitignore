@@ -1,0 +1,7 @@
+env
+.env
+service_account.json
+data
+*/__pycache__
+gsheet.txt
+plan.txt

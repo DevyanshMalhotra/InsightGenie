@@ -1,0 +1,8 @@
+streamlit==1.25.0
+pandas==2.0.3
+google-api-python-client==2.92.0
+google-auth-oauthlib==1.0.0
+openai==0.28.1
+python-dotenv==1.0.0
+requests==2.31.0
+serpapi==0.1.5
