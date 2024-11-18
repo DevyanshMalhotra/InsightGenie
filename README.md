@@ -131,7 +131,7 @@ streamlit run app.py
 
 ## 🎥 Demo Video
 
-Watch the project walkthrough [here](#).
+Watch the project walkthrough [here](https://www.loom.com/share/3207838274de4b3b883799c12e0fffec?sid=0a000b0e-6649-4e2d-af1a-a0d96da1eb11).
 
 ---
 
