@@ -1,167 +1,49 @@
-# InsightGenie: AI Agent Dashboard
+# InsightGenie
 
-InsightGenie is a versatile AI-powered tool designed to extract, analyze, and retrieve specific information from datasets (CSV or Google Sheets) using dynamic queries. With integrated search capabilities and advanced response generation, InsightGenie simplifies data extraction and enhances productivity.
+A **Streamlit research and data-extraction prototype** that combines CSV / Google Sheets input, targeted web search and FLAN-T5 text generation.
 
-![Dashboard Interface](https://github.com/DevyanshMalhotra/InsightGenie/raw/main/images/image6.png)
+![InsightGenie dashboard](images/image6.png)
 
----
+## What it does
 
-## 🌟 Features
+- Reads a local CSV or a Google Sheet into a pandas DataFrame.
+- Lets you select the entity column, a value column and a natural-language query template.
+- Looks for the requested entity in the uploaded data; if not found, attempts a web search.
+- Passes search snippets to `google/flan-t5-base` and displays the generated response.
+- Exports extracted results to CSV.
 
-1. **File Upload and Google Sheets Integration**:
-   - Upload CSV files or connect Google Sheets using the Google Sheets API.
-   - Preview data and select columns for queries.
+The current implementation is **a single-entity query workflow**. It does not implement a general autonomous research agent or a verified large-scale batch pipeline.
 
-2. **Dynamic Query Input**:
-   - Define custom queries with placeholders like `{entity}` for dynamic replacements.
+## Source layout
 
-3. **Automated Web Search**:
-   - Perform web searches for entities using dynamically generated queries.
-   - Extract relevant information from search results.
+```text
+app.py                 Streamlit interface and query flow
+utils/google_sheets.py  Google Sheets access
+utils/google_search.py  Web-snippet retrieval
+utils/llm_handler.py    FLAN-T5 inference
+images/                Interface screenshots
+requirements.txt
+```
 
-4. **AI-Powered Contextual Responses**:
-   - Use Hugging Face's FLAN-T5 to generate focused, context-aware responses.
+## Local setup
 
-5. **Results Visualization and Export**:
-   - Display extracted results in a table format.
-   - Download the results as a CSV file.
-
----
-
-## 🛠️ Technology Stack
-
-- **Frontend**: Streamlit
-- **Backend**: Python
-- **APIs**:
-  - Google Sheets API
-  - Hugging Face Transformers
-- **Search Capability**: Web scraping with BeautifulSoup
-- **Libraries**: Pandas, Requests, Transformers, Streamlit
-
----
-
-## 📂 Project Structure
-
-InsightGenie/
-├── app.py                 # Main application script  
-├── requirements.txt       # List of dependencies  
-├── utils/                 # Utility scripts  
-│   ├── google_sheets.py   # Google Sheets integration  
-│   ├── google_search.py   # Web search logic  
-│   ├── llm_handler.py     # AI model interaction  
-├── service_account.json   # Google API credentials (gitignored)  
-├── README.md              # Project documentation  
-├── data/                  # Example CSV files  
-           
-
-## 🚀 Getting Started
-
-### 1. Clone the Repository
 ```bash
 git clone https://github.com/DevyanshMalhotra/InsightGenie.git
-cd insightgenie
-```
-
-### 2. Install Dependencies
-Install the required libraries:
-
-```bash
+cd InsightGenie
+python -m venv .venv
+# Windows: .venv\Scripts\activate
+# Linux/macOS: source .venv/bin/activate
 pip install -r requirements.txt
-```
-
-### 3. Setup Google API Credentials
-- Create a service account in your Google Cloud Console.
-- Download the JSON key file and save it as `service_account.json` in the project root.
-- Share your Google Sheet with the service account email (Editor permission).
-
-### 4. Run the Application
-Start the Streamlit dashboard:
-
-```bash
 streamlit run app.py
 ```
 
-### 5. Access the Dashboard
-- Open the URL provided by Streamlit in your browser.
-- Upload a CSV file or connect a Google Sheet to begin.
+Open the address shown by Streamlit. CSV mode works without Google credentials. For Sheets mode, configure access using `utils/google_sheets.py` and the Google Sheets API; do not commit credentials or service-account files. Hugging Face model files are downloaded on first use.
 
----
+## Notes and limitations
 
-## 📝 Usage Instructions
+- Google HTML search is scraped by selectors and may stop working if the search page changes or blocks requests.
+- FLAN-T5 may produce incorrect or unsupported responses; verify extracted facts against original sources.
+- The dataset and query parsing are prototype-level, not production ETL.
+- User-provided URLs/data should be treated as untrusted input; deployment requires stronger validation, resource limits and secrets management.
 
-### Upload Data:
-- Choose either a CSV file or a Google Sheet.
-- Preview the uploaded data in the dashboard.
-
-### Define Queries:
-- Select the primary column for entities.
-- Enter a dynamic query template (e.g., `Find the {query_column} for {entity}`).
-
-### Run Queries:
-- Perform automated searches or extract information directly from the dataset.
-- View extracted information in the dashboard.
-
-### Download Results:
-- Export the results as a CSV file for further use.
-
----
-
-## 📸 Screenshots
-
-- **Dashboard Interface**
-![Dashboard Interface](https://github.com/DevyanshMalhotra/InsightGenie/raw/main/images/image1.png)
-
-![Dashboard Interface](https://github.com/DevyanshMalhotra/InsightGenie/raw/main/images/image4.png)
-
-- **Results Table**
-![Results/Query outputs](https://github.com/DevyanshMalhotra/InsightGenie/raw/main/images/image3.png)
-
-![Results/Query outputs](https://github.com/DevyanshMalhotra/InsightGenie/raw/main/images/image5.png)
-
-
-## 🛡️ API Key Management
-
-### Google Sheets:
-- Store the service account credentials in `service_account.json`. Ensure the file is listed in `.gitignore`.
-
-### Environment Variables:
-- Use environment variables for sensitive data like API keys for deployment.
-
----
-
-## 🎥 Demo Video
-
-Watch the project walkthrough [here](https://www.loom.com/share/3207838274de4b3b883799c12e0fffec?sid=74a3f5e6-b204-4b47-9485-f211952998fd).
-
----
-
-## 🌐 Deployment
-
-Deploy the project for free using Streamlit Cloud:
-
-1. Push your repository to GitHub.
-2. Sign up for Streamlit Cloud.
-3. Connect your repository and deploy the app.
-
----
-
-## 📢 Acknowledgments
-
-- **Hugging Face Transformers** for LLM capabilities.
-- **Google Sheets API** for seamless data integration.
-- **BeautifulSoup** for web scraping.
-- **Streamlit** for building an interactive UI.
-
----
-
-## 🧩 FAQ
-
-**Q: What happens if an entity isn't found in the dataset?**  
-A: The application performs an automated web search for missing entities and uses the AI model to generate responses.
-
-**Q: How are large datasets handled?**  
-A: Data is processed in batches to ensure scalability and prevent timeouts.
-
-**Q: Can additional features be added?**  
-A: Yes! The modular structure allows for easy integration of new features such as batch queries or advanced error handling.
-
+[Demo walkthrough](https://www.loom.com/share/3207838274de4b3b883799c12e0fffec?sid=74a3f5e6-b204-4b47-9485-f211952998fd)
